@@ -1,0 +1,89 @@
+# Miscellaneous
+*.class
+*.log
+*.pyc
+*.swp
+.DS_Store
+.atom/
+.build/
+.buildlog/
+.history
+.svn/
+.swiftpm/
+migrate_working_dir/
+
+# IntelliJ related
+*.iml
+*.ipr
+*.iws
+.idea/
+
+# The .vscode folder contains launch configuration and tasks you configure in
+# VS Code which you may wish to be included in version control, so this line
+# is commented out by default.
+#.vscode/
+
+# Flutter/Dart/Pub related
+**/doc/api/
+**/ios/Flutter/.last_build_id
+.dart_tool/
+.flutter-plugins-dependencies
+.pub-cache/
+.pub/
+/build/
+/coverage/
+
+# Symbolication related
+app.*.symbols
+
+# Obfuscation related
+app.*.map.json
+
+# Android Studio will place build artifacts here
+/android/app/debug
+/android/app/profile
+/android/app/release
+
+# Backend related
+backend/node_modules/
+backend/.env
+backend/package-lock.json
+
+# Environment files (SENSITIVE - NEVER COMMIT)
+.env
+.env.local
+.env.*.local
+*.env
+!.env.example
+!backend/.env.example
+.env_mysql_setup
+
+# Temporary documentation files
+CARA_TEST_PAYMENT_BARU.md
+FINAL_SETUP_GUIDE.md
+FINAL_SUMMARY_PAYMENT_FIX.txt
+FLUTTER_BACKEND_CONFIG.md
+FLUTTER_BACKEND_READY.md
+HOTFIX_AUTH_TOKEN.md
+IMPLEMENTATION_GUIDE.md
+MIDTRANS_WEBVIEW_IMPLEMENTATION.md
+MYSQL_SETUP_COMPLETE.md
+MYSQL_SETUP_GUIDE.md
+PAYMENT_SERVICE_FIXED.md
+PERBAIKAN_REDIRECT_PAYMENT.md
+QUICK_FIX_SUMMARY.txt
+QUICK_START_GUIDE.md
+README_CONNECTION.md
+SNACKBAR_POSITION_UPDATE.md
+SOLUSI_FINAL_REDIRECT_PAYMENT.md
+START_HERE.md
+SUMMARY_MIDTRANS_FIX.md
+TEST_MIDTRANS_PAYMENT.md
+TESTING_GUIDE.md
+RUN_MIDTRANS_TEST.sh
+
+# Test files
+test_mysql_connection.js
+
+# Temporary files
+tmp_rovodev_*
