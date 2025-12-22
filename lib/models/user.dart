@@ -43,4 +43,25 @@ class User {
 
   bool get isAdmin => role.toLowerCase() == 'admin';
   bool get isKasir => role.toLowerCase() == 'kasir';
+
+  // CopyWith method for updating user data
+  User copyWith({
+    String? id,
+    String? username,
+    String? nama,
+    String? role,
+    String? email,
+    String? phone,
+    DateTime? createdAt,
+  }) {
+    return User(
+      id: id ?? this.id,
+      username: username ?? this.username,
+      nama: nama ?? this.nama,
+      role: role ?? this.role,
+      email: email ?? this.email,
+      phone: phone ?? this.phone,
+      createdAt: createdAt ?? this.createdAt,
+    );
+  }
 }

@@ -12,6 +12,7 @@ const authRoutes = require('./routes/auth');
 const productRoutes = require('./routes/products');
 const transactionRoutes = require('./routes/transactions');
 const paymentRoutes = require('./routes/payment');
+const businessRoutes = require('./routes/business');
 
 // Initialize Express app
 const app = express();
@@ -98,6 +99,7 @@ app.use('/api/auth', authRoutes);
 app.use('/api/products', productRoutes);
 app.use('/api/transactions', transactionRoutes);
 app.use('/api/payment', paymentRoutes);
+app.use('/api/business', businessRoutes);
 
 // Welcome endpoint
 app.get('/', (req, res) => {

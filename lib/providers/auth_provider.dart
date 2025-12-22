@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import '../models/user.dart';
 import '../services/auth_service.dart';
+import '../services/api_service.dart';
 
 class AuthProvider with ChangeNotifier {
   User? _user;
@@ -109,10 +110,35 @@ class AuthProvider with ChangeNotifier {
   }
 
   // Update user data
-  void updateUser(User updatedUser) {
-    _user = updatedUser;
-    AuthService.updateUserData(updatedUser);
-    notifyListeners();
+  Future<bool> updateUser({
+    required String nama,
+    String? email,
+    String? phone,
+  }) async {
+    _setLoading(true);
+    _clearError();
+
+    try {
+      final result = await ApiService.updateProfile(
+        nama: nama,
+        email: email,
+        phone: phone,
+      );
+
+      if (result['success']) {
+        _user = result['user'] as User;
+        notifyListeners();
+        return true;
+      } else {
+        _setError(result['message']);
+        return false;
+      }
+    } catch (e) {
+      _setError('Failed to update profile: $e');
+      return false;
+    } finally {
+      _setLoading(false);
+    }
   }
 
   // Helper methods

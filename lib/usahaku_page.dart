@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'providers/auth_provider.dart';
+import 'providers/business_provider.dart';
+import 'providers/product_provider.dart';
 import 'edit_usaha_page.dart';
 
 class UsahakuPage extends StatefulWidget {
@@ -13,13 +14,6 @@ class UsahakuPage extends StatefulWidget {
 class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _fadeAnimation;
-
-  // Dummy data - in production, fetch from API/Provider
-  final String businessName = 'GRIYO Store';
-  final String ownerName = 'Admin';
-  final String address = 'Jl. Contoh No. 123, Jakarta';
-  final String phone = '081234567890';
-  final String description = 'Toko serba ada dengan harga terjangkau dan pelayanan terbaik';
 
   @override
   void initState() {
@@ -38,6 +32,12 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
     );
 
     _animationController.forward();
+
+    // Load business data
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      context.read<BusinessProvider>().fetchBusiness();
+      context.read<ProductProvider>().fetchProducts();
+    });
   }
 
   @override
@@ -87,7 +87,12 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
   }
 
   Widget _buildBusinessHeader() {
-    return SliverAppBar(
+    return Consumer<BusinessProvider>(
+      builder: (context, businessProvider, child) {
+        final business = businessProvider.business;
+        final businessName = business?.namaUsaha ?? 'GRIYO Store';
+        
+        return SliverAppBar(
       expandedHeight: 200,
       floating: false,
       pinned: true,
@@ -102,36 +107,36 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
               colors: [Colors.blue.shade600, Colors.blue.shade400],
             ),
           ),
-          child: SafeArea(
+          child: Padding(
+            padding: const EdgeInsets.only(top: 30),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisSize: MainAxisSize.min,
               children: [
-                const SizedBox(height: 20),
-                
                 // Business Logo/Icon
                 Container(
-                  padding: const EdgeInsets.all(4),
+                  padding: const EdgeInsets.all(3),
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    border: Border.all(color: Colors.white, width: 3),
+                    border: Border.all(color: Colors.white, width: 2),
                   ),
                   child: CircleAvatar(
-                    radius: 50,
+                    radius: 45,
                     backgroundColor: Colors.white,
                     child: Icon(
                       Icons.store,
-                      size: 50,
+                      size: 45,
                       color: Colors.blue.shade600,
                     ),
                   ),
                 ),
-                const SizedBox(height: 12),
+                const SizedBox(height: 10),
                 
                 // Business Name
                 Text(
                   businessName,
                   style: const TextStyle(
-                    fontSize: 24,
+                    fontSize: 22,
                     fontWeight: FontWeight.bold,
                     color: Colors.white,
                   ),
@@ -140,7 +145,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
                 
                 // Business Category
                 Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                   decoration: BoxDecoration(
                     color: Colors.white.withOpacity(0.2),
                     borderRadius: BorderRadius.circular(20),
@@ -148,7 +153,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
                   child: const Text(
                     'Toko Retail',
                     style: TextStyle(
-                      fontSize: 14,
+                      fontSize: 13,
                       color: Colors.white,
                       fontWeight: FontWeight.w600,
                     ),
@@ -160,10 +165,34 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
         ),
       ),
     );
+      },
+    );
   }
 
   Widget _buildBusinessInfoCard() {
-    return Container(
+    return Consumer<BusinessProvider>(
+      builder: (context, businessProvider, child) {
+        final business = businessProvider.business;
+        
+        if (businessProvider.isLoading) {
+          return Container(
+            margin: const EdgeInsets.symmetric(horizontal: 16),
+            padding: const EdgeInsets.all(60),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+            ),
+            child: const Center(child: CircularProgressIndicator()),
+          );
+        }
+        
+        final businessName = business?.namaUsaha ?? 'GRIYO Store';
+        final ownerName = business?.pemilik ?? 'Admin';
+        final address = business?.alamat ?? 'Belum diatur';
+        final phone = business?.telepon ?? 'Belum diatur';
+        final description = business?.deskripsi ?? 'Belum ada deskripsi';
+        
+        return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       padding: const EdgeInsets.all(20),
       decoration: BoxDecoration(
@@ -221,6 +250,8 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
         ],
       ),
     );
+      },
+    );
   }
 
   Widget _buildInfoRow(IconData icon, String label, String value, {int maxLines = 1}) {
@@ -265,7 +296,13 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
   }
 
   Widget _buildQuickStats() {
-    return Container(
+    return Consumer2<ProductProvider, BusinessProvider>(
+      builder: (context, productProvider, businessProvider, child) {
+        final totalProducts = productProvider.products.length;
+        // Employees count is not in database yet, using placeholder
+        const employeeCount = 3;
+        
+        return Container(
       margin: const EdgeInsets.symmetric(horizontal: 16),
       child: Row(
         children: [
@@ -273,7 +310,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
             child: _buildStatCard(
               icon: Icons.inventory_2,
               title: 'Total Produk',
-              value: '156',
+              value: '$totalProducts',
               color: Colors.purple,
             ),
           ),
@@ -282,12 +319,14 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
             child: _buildStatCard(
               icon: Icons.people,
               title: 'Karyawan',
-              value: '3',
+              value: '$employeeCount',
               color: Colors.orange,
             ),
           ),
         ],
       ),
+    );
+      },
     );
   }
 
@@ -467,48 +506,53 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
   }
 
   void _showQRCodeDialog() {
+    final businessProvider = context.read<BusinessProvider>();
+    final businessName = businessProvider.business?.namaUsaha ?? 'GRIYO Store';
+    
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('QR Code Usaha'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            Container(
-              padding: const EdgeInsets.all(20),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade100,
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: Column(
-                children: [
-                  Icon(
-                    Icons.qr_code_2,
-                    size: 150,
-                    color: Colors.grey.shade400,
-                  ),
-                  const SizedBox(height: 16),
-                  Text(
-                    businessName,
-                    style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 16,
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                padding: const EdgeInsets.all(20),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade100,
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Column(
+                  children: [
+                    Icon(
+                      Icons.qr_code_2,
+                      size: 150,
+                      color: Colors.grey.shade400,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: 16),
+                    Text(
+                      businessName,
+                      style: const TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'Customer dapat scan QR code ini untuk melihat profil usaha Anda',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade600,
+              const SizedBox(height: 16),
+              Text(
+                'Customer dapat scan QR code ini untuk melihat profil usaha Anda',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
+                ),
+                textAlign: TextAlign.center,
               ),
-              textAlign: TextAlign.center,
-            ),
-          ],
+            ],
+          ),
         ),
         actions: [
           TextButton(

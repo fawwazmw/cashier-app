@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import '../models/user.dart';
 import '../models/product.dart';
 import '../models/transaction.dart';
+import '../models/business.dart';
 import '../config/api_config.dart';
 
 class ApiService {
@@ -267,6 +268,92 @@ class ApiService {
         return {
           'success': false,
           'message': data['message'] ?? 'Failed to update transaction',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Network error: $e',
+      };
+    }
+  }
+
+  // BUSINESS ENDPOINTS
+  static Future<Business> getBusiness() async {
+    try {
+      final response = await http.get(
+        Uri.parse('$baseUrl/business'),
+        headers: _headers,
+      );
+      
+      if (response.statusCode == 200) {
+        final data = jsonDecode(response.body);
+        return Business.fromJson(data['data']);
+      } else {
+        throw Exception('Failed to load business info');
+      }
+    } catch (e) {
+      throw Exception('Network error: $e');
+    }
+  }
+
+  static Future<Map<String, dynamic>> updateBusiness(Map<String, dynamic> businessData) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/business'),
+        headers: _headers,
+        body: jsonEncode(businessData),
+      );
+      
+      final data = jsonDecode(response.body);
+      
+      if (response.statusCode == 200 && data['success'] == true) {
+        return {
+          'success': true,
+          'business': Business.fromJson(data['business']),
+        };
+      } else {
+        return {
+          'success': false,
+          'message': data['message'] ?? 'Failed to update business',
+        };
+      }
+    } catch (e) {
+      return {
+        'success': false,
+        'message': 'Network error: $e',
+      };
+    }
+  }
+
+  // USER PROFILE ENDPOINTS
+  static Future<Map<String, dynamic>> updateProfile({
+    required String nama,
+    String? email,
+    String? phone,
+  }) async {
+    try {
+      final response = await http.put(
+        Uri.parse('$baseUrl/auth/profile'),
+        headers: _headers,
+        body: jsonEncode({
+          'nama': nama,
+          'email': email,
+          'phone': phone,
+        }),
+      );
+      
+      final data = jsonDecode(response.body);
+      
+      if (response.statusCode == 200 && data['success'] == true) {
+        return {
+          'success': true,
+          'user': User.fromJson(data['user']),
+        };
+      } else {
+        return {
+          'success': false,
+          'message': data['message'] ?? 'Failed to update profile',
         };
       }
     } catch (e) {

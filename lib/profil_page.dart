@@ -100,39 +100,39 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
                   colors: [Colors.blue.shade600, Colors.blue.shade400],
                 ),
               ),
-              child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 30),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
                   children: [
-                    const SizedBox(height: 20),
-                    
                     // Avatar
                     Container(
-                      padding: const EdgeInsets.all(4),
+                      padding: const EdgeInsets.all(3),
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
-                        border: Border.all(color: Colors.white, width: 3),
+                        border: Border.all(color: Colors.white, width: 2),
                       ),
                       child: CircleAvatar(
-                        radius: 50,
+                        radius: 45,
                         backgroundColor: Colors.white,
                         child: Text(
                           user?.nama.substring(0, 1).toUpperCase() ?? 'U',
                           style: TextStyle(
-                            fontSize: 40,
+                            fontSize: 36,
                             fontWeight: FontWeight.bold,
                             color: Colors.blue.shade600,
                           ),
                         ),
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 10),
                     
                     // Name
                     Text(
                       user?.nama ?? 'User',
                       style: const TextStyle(
-                        fontSize: 24,
+                        fontSize: 22,
                         fontWeight: FontWeight.bold,
                         color: Colors.white,
                       ),
@@ -141,7 +141,7 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
                     
                     // Role Badge
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+                      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 5),
                       decoration: BoxDecoration(
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(20),
@@ -149,7 +149,7 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
                       child: Text(
                         user?.isAdmin == true ? 'Administrator' : 'Kasir',
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 13,
                           color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
@@ -472,51 +472,53 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         title: const Text('Tentang Aplikasi'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Text.rich(
-              TextSpan(
-                children: [
-                  TextSpan(
-                    text: "GRIYO ",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.blue,
+        content: SingleChildScrollView(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text.rich(
+                TextSpan(
+                  children: [
+                    TextSpan(
+                      text: "GRIYO ",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue,
+                      ),
                     ),
-                  ),
-                  TextSpan(
-                    text: "POS",
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: Colors.red,
+                    TextSpan(
+                      text: "POS",
+                      style: TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.red,
+                      ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-              'Versi 1.0.0',
-              style: TextStyle(color: Colors.grey.shade600),
-            ),
-            const SizedBox(height: 8),
-            const Text(
-              'Sistem Point of Sale modern untuk memudahkan pengelolaan transaksi dan inventori usaha Anda.',
-              style: TextStyle(fontSize: 14),
-            ),
-            const SizedBox(height: 16),
-            Text(
-              '© 2024 GRIYO POS Team',
-              style: TextStyle(
-                fontSize: 12,
-                color: Colors.grey.shade600,
+              const SizedBox(height: 12),
+              Text(
+                'Versi 1.0.0',
+                style: TextStyle(color: Colors.grey.shade600),
               ),
-            ),
-          ],
+              const SizedBox(height: 8),
+              const Text(
+                'Sistem Point of Sale modern untuk memudahkan pengelolaan transaksi dan inventori usaha Anda.',
+                style: TextStyle(fontSize: 14),
+              ),
+              const SizedBox(height: 16),
+              Text(
+                '© 2024 GRIYO POS Team',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.grey.shade600,
+                ),
+              ),
+            ],
+          ),
         ),
         actions: [
           TextButton(
