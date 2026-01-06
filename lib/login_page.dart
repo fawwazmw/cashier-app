@@ -143,7 +143,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                 ],
               ),
               child: const Icon(
-                Icons.local_laundry_service,
+                Icons.store,
                 size: 50,
                 color: Colors.white,
               ),
@@ -154,7 +154,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
             TextSpan(
               children: [
                 TextSpan(
-                  text: "LAUNDRY ",
+                  text: "GRIYO ",
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
                   style: TextStyle(
                     fontSize: 32,
                     fontWeight: FontWeight.bold,
-                    color: Color(0xFF4CAF50),
+                    color: Colors.red,
                     letterSpacing: 1,
                   ),
                 ),
@@ -477,7 +477,7 @@ class _LoginPageState extends State<LoginPage> with SingleTickerProviderStateMix
   Widget _buildFooter() {
     return Center(
       child: Text(
-        '© 2024 Laundry POS - Sistem Manajemen Laundry',
+        '© 2024 GRIYO POS - Sistem Point of Sale',
         style: TextStyle(
           fontSize: 12,
           color: Colors.grey.shade500,

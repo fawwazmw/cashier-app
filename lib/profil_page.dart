@@ -481,7 +481,7 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
                 TextSpan(
                   children: [
                     TextSpan(
-                      text: "LAUNDRY ",
+                      text: "GRIYO ",
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
@@ -493,7 +493,7 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
-                        color: Color(0xFF4CAF50),
+                        color: Colors.red,
                       ),
                     ),
                   ],
@@ -511,7 +511,7 @@ class _ProfilPageState extends State<ProfilPage> with SingleTickerProviderStateM
               ),
               const SizedBox(height: 16),
               Text(
-                '© 2024 Laundry POS Team',
+                '© 2024 GRIYO POS Team',
                 style: TextStyle(
                   fontSize: 12,
                   color: Colors.grey.shade600,

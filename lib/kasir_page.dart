@@ -86,7 +86,7 @@ class _KasirPageState extends State<KasirPage> {
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: const Text('Kasir Laundry'),
+      title: const Text('Kasir POS'),
       elevation: 0,
       backgroundColor: Colors.blue.shade600,
       actions: [
@@ -124,7 +124,7 @@ class _KasirPageState extends State<KasirPage> {
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: 'Cari layanan...',
+              hintText: 'Cari produk...',
               prefixIcon: const Icon(Icons.search),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(12),
@@ -229,7 +229,7 @@ class _KasirPageState extends State<KasirPage> {
               children: [
                 Icon(Icons.inventory_2_outlined, size: 64, color: Colors.grey.shade300),
                 const SizedBox(height: 16),
-                const Text('Tidak ada layanan ditemukan'),
+                const Text('Tidak ada produk ditemukan'),
               ],
             ),
           );

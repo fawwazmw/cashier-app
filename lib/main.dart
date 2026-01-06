@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        title: 'Laundry POS',
+        title: 'Griyo POS',
         theme: ThemeData(
           primarySwatch: Colors.blue,
           fontFamily: 'Arial',

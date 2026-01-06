@@ -90,7 +90,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
     return Consumer<BusinessProvider>(
       builder: (context, businessProvider, child) {
         final business = businessProvider.business;
-        final businessName = business?.namaUsaha ?? 'My Laundry';
+        final businessName = business?.namaUsaha ?? 'GRIYO Store';
         
         return SliverAppBar(
       expandedHeight: 200,
@@ -124,7 +124,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
                     radius: 45,
                     backgroundColor: Colors.white,
                     child: Icon(
-                      Icons.local_laundry_service,
+                      Icons.store,
                       size: 45,
                       color: Colors.blue.shade600,
                     ),
@@ -151,7 +151,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: const Text(
-                    'Laundry Service',
+                    'Toko Retail',
                     style: TextStyle(
                       fontSize: 13,
                       color: Colors.white,
@@ -186,7 +186,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
           );
         }
         
-        final businessName = business?.namaUsaha ?? 'My Laundry';
+        final businessName = business?.namaUsaha ?? 'GRIYO Store';
         final ownerName = business?.pemilik ?? 'Admin';
         final address = business?.alamat ?? 'Belum diatur';
         final phone = business?.telepon ?? 'Belum diatur';
@@ -309,7 +309,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
           Expanded(
             child: _buildStatCard(
               icon: Icons.inventory_2,
-              title: 'Total Layanan',
+              title: 'Total Produk',
               value: '$totalProducts',
               color: Colors.purple,
             ),
@@ -507,7 +507,7 @@ class _UsahakuPageState extends State<UsahakuPage> with SingleTickerProviderStat
 
   void _showQRCodeDialog() {
     final businessProvider = context.read<BusinessProvider>();
-    final businessName = businessProvider.business?.namaUsaha ?? 'My Laundry';
+    final businessName = businessProvider.business?.namaUsaha ?? 'GRIYO Store';
     
     showDialog(
       context: context,

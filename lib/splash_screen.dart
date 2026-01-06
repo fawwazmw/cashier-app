@@ -119,7 +119,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                           ],
                         ),
                         child: const Icon(
-                          Icons.local_laundry_service,
+                          Icons.store,
                           size: 80,
                           color: Colors.blue,
                         ),
@@ -131,7 +131,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                         TextSpan(
                           children: [
                             TextSpan(
-                              text: "LAUNDRY ",
+                              text: "GRIYO ",
                               style: TextStyle(
                                 fontSize: 42,
                                 fontWeight: FontWeight.bold,
@@ -144,7 +144,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                               style: TextStyle(
                                 fontSize: 42,
                                 fontWeight: FontWeight.bold,
-                                color: Color(0xFF4CAF50),
+                                color: Colors.red,
                                 letterSpacing: 2,
                               ),
                             ),
@@ -155,7 +155,7 @@ class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderSt
                       
                       // Tagline
                       const Text(
-                        'Sistem Manajemen Laundry Modern',
+                        'Sistem Point of Sale Modern',
                         style: TextStyle(
                           fontSize: 16,
                           color: Colors.grey,
