@@ -96,7 +96,7 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
-      title: const Text('Kelola Produk'),
+      title: const Text('Kelola Layanan'),
       elevation: 0,
       backgroundColor: Colors.blue.shade600,
       actions: [
@@ -123,7 +123,7 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
           TextField(
             controller: _searchController,
             decoration: InputDecoration(
-              hintText: 'Cari produk...',
+              hintText: 'Cari layanan...',
               prefixIcon: const Icon(Icons.search),
               suffixIcon: _searchController.text.isNotEmpty
                   ? IconButton(
@@ -246,12 +246,12 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
               children: [
                 Icon(Icons.inventory_2_outlined, size: 64, color: Colors.grey.shade300),
                 const SizedBox(height: 16),
-                const Text('Tidak ada produk'),
+                const Text('Tidak ada layanan'),
                 const SizedBox(height: 16),
                 ElevatedButton.icon(
                   onPressed: _navigateToAddProduct,
                   icon: const Icon(Icons.add),
-                  label: const Text('Tambah Produk'),
+                  label: const Text('Tambah Layanan'),
                 ),
               ],
             ),
@@ -618,7 +618,7 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
       onPressed: _navigateToAddProduct,
       backgroundColor: Colors.blue.shade600,
       icon: const Icon(Icons.add),
-      label: const Text('Tambah Produk'),
+      label: const Text('Tambah Layanan'),
     );
   }
 
@@ -642,8 +642,8 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
       context: context,
       builder: (context) => AlertDialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-        title: const Text('Hapus Produk'),
-        content: Text('Apakah Anda yakin ingin menghapus "${product.nama}"?'),
+        title: const Text('Hapus Layanan'),
+        content: Text('Apakah Anda yakin ingin menghapus layanan "${product.nama}"?'),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
@@ -680,7 +680,7 @@ class _KelolaProdukPageState extends State<KelolaProdukPage> with SingleTickerPr
               const SizedBox(width: 12),
               Expanded(
                 child: Text(
-                  success ? 'Produk berhasil dihapus' : 'Gagal menghapus produk',
+                  success ? 'Layanan berhasil dihapus' : 'Gagal menghapus layanan',
                 ),
               ),
             ],

@@ -8,7 +8,7 @@ class EditProdukPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Edit Produk", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+        title: const Text("Edit Layanan", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
         backgroundColor: Colors.white,
         elevation: 0,
         leading: IconButton(
@@ -27,7 +27,7 @@ class EditProdukPage extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-            const Text("Nama Produk", style: TextStyle(fontWeight: FontWeight.bold)),
+            const Text("Nama Layanan", style: TextStyle(fontWeight: FontWeight.bold)),
             const TextField(decoration: InputDecoration(hintText: "Cola Coca")),
 
             const SizedBox(height: 16),

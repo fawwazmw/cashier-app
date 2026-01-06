@@ -116,7 +116,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       TextSpan(
                         children: [
                           TextSpan(
-                            text: "GRIYO ",
+                            text: "LAUNDRY ",
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
@@ -129,7 +129,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                             style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.bold,
-                              color: Colors.red,
+                              color: Color(0xFF4CAF50),
                               letterSpacing: 1,
                             ),
                           ),
@@ -275,7 +275,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                       Expanded(
                         child: _buildStatCard(
                           icon: Icons.inventory_2,
-                          title: 'Total Produk',
+                          title: 'Total Layanan',
                           value: '$totalProducts',
                           color: Colors.purple,
                           gradient: [Colors.purple.shade400, Colors.purple.shade600],
@@ -389,7 +389,7 @@ class _HomePageState extends State<HomePage> with SingleTickerProviderStateMixin
                     Expanded(
                       child: _buildActionButton(
                         icon: Icons.inventory,
-                        label: 'Produk',
+                        label: 'Layanan',
                         color: Colors.purple,
                         onTap: () {
                           Navigator.pushNamed(context, '/kelola-produk');
