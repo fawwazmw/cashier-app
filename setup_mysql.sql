@@ -1,9 +1,9 @@
--- LAUNDRY POS Database Setup Script
+-- GRIYO POS Database Setup Script (With Laundry Data)
 -- Jalankan script ini setelah MySQL terinstall
 
 -- Create database
-CREATE DATABASE IF NOT EXISTS laundry_pos;
-USE laundry_pos;
+CREATE DATABASE IF NOT EXISTS griyo_pos;
+USE griyo_pos;
 
 -- Tabel Users (Admin dan Kasir)
 CREATE TABLE users (
@@ -144,4 +144,4 @@ CREATE INDEX idx_transactions_date_status ON transactions(created_at, status);
 CREATE INDEX idx_transaction_items_composite ON transaction_items(transaction_id, product_id);
 
 -- Show success message
-SELECT 'LAUNDRY POS Database setup completed successfully!' as message;
+SELECT 'GRIYO POS Database setup completed successfully! (Laundry Data Loaded)' as message;

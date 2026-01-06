@@ -4,7 +4,7 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-console.log('🚀 LAUNDRY POS Backend Setup\n');
+console.log('🚀 GRIYO POS Backend Setup (Laundry Data)\n');
 
 // Check if Node.js version is compatible
 const nodeVersion = process.version;
