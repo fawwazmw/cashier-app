@@ -1,9 +1,9 @@
--- GRIYO POS Database Setup Script
+-- LAUNDRY POS Database Setup Script
 -- Jalankan script ini setelah MySQL terinstall
 
 -- Create database
-CREATE DATABASE IF NOT EXISTS griyo_pos;
-USE griyo_pos;
+CREATE DATABASE IF NOT EXISTS laundry_pos;
+USE laundry_pos;
 
 -- Tabel Users (Admin dan Kasir)
 CREATE TABLE users (
@@ -76,21 +76,21 @@ CREATE TABLE transaction_items (
 
 -- Insert default users (password: 123456)
 INSERT INTO users (username, password, nama, role, email, phone) VALUES 
-('admin', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator', 'admin', 'admin@griyopos.com', '081234567890'),
-('kasir', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Kasir POS', 'kasir', 'kasir@griyopos.com', '081234567891');
+('admin', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Administrator Laundry', 'admin', 'admin@laundrypos.com', '081234567890'),
+('kasir', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Kasir Laundry', 'kasir', 'kasir@laundrypos.com', '081234567891');
 
--- Insert sample products
+-- Insert sample products (Layanan Laundry)
 INSERT INTO products (nama, harga, stok, kategori, deskripsi) VALUES 
-('Sabun Lifebuoy', 7000, 50, 'Toiletries', 'Sabun antiseptik untuk keluarga'),
-('Shampo Pantene', 15000, 30, 'Toiletries', 'Shampo untuk rambut sehat'),
-('Pasta Gigi Pepsodent', 12000, 25, 'Toiletries', 'Pasta gigi untuk gigi putih'),
-('Beras Premium 5kg', 80000, 15, 'Makanan', 'Beras premium kualitas terbaik'),
-('Minyak Goreng 2L', 35000, 20, 'Makanan', 'Minyak goreng berkualitas'),
-('Susu Ultra 1L', 18000, 40, 'Minuman', 'Susu segar dan bergizi'),
-('Teh Botol Sosro', 5000, 100, 'Minuman', 'Teh botol segar'),
-('Kopi Kapal Api', 8000, 60, 'Minuman', 'Kopi bubuk pilihan'),
-('Indomie Goreng', 3000, 200, 'Makanan', 'Mie instan rasa ayam bawang'),
-('Tissue Nice', 4000, 80, 'Toiletries', 'Tissue wajah berkualitas');
+('Cuci Kering Lipat', 7000, 9999, 'Kiloan', 'Cuci bersih, kering, dan lipat rapi (per kg)'),
+('Cuci Setrika', 9000, 9999, 'Kiloan', 'Cuci bersih dan setrika halus (per kg)'),
+('Setrika Saja', 6000, 9999, 'Kiloan', 'Jasa setrika saja (per kg)'),
+('Dry Clean Jas', 35000, 9999, 'Satuan', 'Dry cleaning khusus jas pria/wanita'),
+('Bed Cover Kecil', 25000, 9999, 'Satuan', 'Cuci bed cover ukuran single/kecil'),
+('Bed Cover Besar', 40000, 9999, 'Satuan', 'Cuci bed cover ukuran double/king'),
+('Cuci Sepatu', 30000, 9999, 'Satuan', 'Deep cleaning sepatu'),
+('Cuci Karpet', 15000, 9999, 'Satuan', 'Cuci karpet (per meter persegi)'),
+('Boneka Kecil', 10000, 9999, 'Satuan', 'Cuci boneka ukuran kecil'),
+('Express 3 Jam', 15000, 9999, 'Kilat', 'Layanan cuci kilat selesai 3 jam (per kg)');
 
 -- Create views for reporting
 CREATE VIEW v_daily_sales AS
@@ -122,4 +122,4 @@ CREATE INDEX idx_transactions_date_status ON transactions(created_at, status);
 CREATE INDEX idx_transaction_items_composite ON transaction_items(transaction_id, product_id);
 
 -- Show success message
-SELECT 'GRIYO POS Database setup completed successfully!' as message;
+SELECT 'LAUNDRY POS Database setup completed successfully!' as message;
